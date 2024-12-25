@@ -4,7 +4,7 @@ import { Head, Link } from "@inertiajs/react";
 import { TRANSACTION_CATEGORY_CLASS_MAP, TRANSACTION_TYPE_CLASS_MAP } from "../constants";
 import Chart from 'chart.js/auto';
 import { useEffect } from "react";
-export default function Index({auth, transactions}) {
+export default function Index({auth, transactions, success}) {
     
     useEffect(() => {
         // Filtruj kategorie i oblicz wartości wydatków
@@ -61,15 +61,28 @@ export default function Index({auth, transactions}) {
         <AuthenticatedLayout
         user = {auth.user}
         header={
+            <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                 <span>{auth.user.name} | </span>
                 <span>Saldo: {auth.user.balance.toFixed(2)}</span>
             </h2>
+            <Link
+            href={route("transaction.create")}
+            className="bg-emerald-500 py-1 px-1 text-white rounded shadow transition-all hover:bg-emerald-600"
+            >
+                Dodaj nową transakcję
+            </Link>
+            </div>
         }>
         <Head title="Moj miesiąc" />
         
         <div className="py-12">
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    {success && (
+                    <div className="bg-emerald-500 py-2 px-4 text-white rounded mb-4">
+                    {success}
+                    </div>
+                )}
                 <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                      <div className="p-6 text-gray-900 dark:text-gray-100">
                      <div className="flex justify-between items-center">

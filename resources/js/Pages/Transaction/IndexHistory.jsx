@@ -118,13 +118,13 @@ export default function Index({auth, transactions, queryParams=null}) {
                             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
-                                            <th onClick={e => sortChanged('id')} className="px-3 py-2">ID</th>
-                                            <th onClick={e => sortChanged('name')} className="px-3 py-2">name</th>
-                                            <th onClick={e => sortChanged('description')} className="px-3 py-2">description</th>
-                                            <th onClick={e => sortChanged('type')} className="px-3 py-2">type</th>
-                                            <th onClick={e => sortChanged('amount')} className="px-3 py-2">amount</th>
-                                            <th onClick={e => sortChanged('category')} className="px-3 py-2">category</th>
-                                            <th onClick={e => sortChanged('date')} className="px-3 py-2">date</th>
+                                            <th onClick={e => sortChanged('id')} className="px-3 py-2 cursor-pointer">ID</th>
+                                            <th onClick={e => sortChanged('name')} className="px-3 py-2 cursor-pointer">name</th>
+                                            <th onClick={e => sortChanged('description')} className="px-3 py-2 cursor-pointer">description</th>
+                                            <th onClick={e => sortChanged('type')} className="px-3 py-2 cursor-pointer">type</th>
+                                            <th onClick={e => sortChanged('amount')} className="px-3 py-2 cursor-pointer">amount</th>
+                                            <th onClick={e => sortChanged('category')} className="px-3 py-2 cursor-pointer">category</th>
+                                            <th onClick={e => sortChanged('date')} className="px-3 py-2 cursor-pointer">date</th>
                                             <th className="px-3 py-2 text-right">action</th>
                                         </tr>
                                     </thead>
@@ -205,7 +205,7 @@ export default function Index({auth, transactions, queryParams=null}) {
                                             <th className="px-3 py-2">
                                             <div className="flex flex-col space-y-2">
                                             <TextInput
-                                                className="mx-auto p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"
+                                                className="mx-auto p-2  rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"
                                                 defaultValue={queryParams.dateFrom}
                                                 placeholder="Data Od"
                                                 type="date"

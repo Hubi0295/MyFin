@@ -23,7 +23,8 @@ class TransactionController extends Controller
             ->whereYear('date', $currentYear);
         $transactions = $query->paginate(100)->onEachSide(1);
         return inertia("Transaction/Index", [
-            "transactions" => TransactionResource::collection($transactions)
+            "transactions" => TransactionResource::collection($transactions),
+            'success' => session('success'),
         ]);
     }
     public function history()
@@ -64,7 +65,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        return inertia("Transaction/Create");
     }
 
     /**
@@ -72,7 +73,11 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $data['date'] = Carbon::now();
+        Transaction::create($data);
+        return to_route('transaction.index')->with('success', 'Transakcja została dodana');
     }
 
     /**
