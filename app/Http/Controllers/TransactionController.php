@@ -20,7 +20,8 @@ class TransactionController extends Controller
 
         $query = Transaction::query()
             ->whereMonth('date', $currentMonth)
-            ->whereYear('date', $currentYear);
+            ->whereYear('date', $currentYear)
+            ->where('user_id', auth()->id());
         $transactions = $query->paginate(100)->onEachSide(1);
         return inertia("Transaction/Index", [
             "transactions" => TransactionResource::collection($transactions),
@@ -29,7 +30,7 @@ class TransactionController extends Controller
     }
     public function history()
     {
-        $query = Transaction::query();
+        $query = Transaction::query()->where('user_id', auth()->id());
         $sortField = request("sort_field", 'date');
         $sortDirection = request("sort_direction", 'desc');
         if(request("name")){
@@ -53,10 +54,12 @@ class TransactionController extends Controller
         if(request("category")){
             $query->where("category", request("category"));
         }
+        
         $transactions = $query->orderBy($sortField, $sortDirection)->paginate(100)->onEachSide(1);
         return inertia("Transaction/IndexHistory", [
             "transactions" => TransactionResource::collection($transactions),
             'queryParams' => request()->query()?:null,
+            'success' => session('success'),
         ]);
     }
 
@@ -93,7 +96,9 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        return inertia('Transaction/Edit', [
+            'transaction' => new TransactionResource($transaction),
+        ]);
     }
 
     /**
@@ -101,14 +106,19 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
-        //
+        $name = $transaction->name;
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $data['date'] = Carbon::now();
+        $transaction->update($data);
+        return to_route('transaction.index')->with('success', "Transakcja ".$name." została zaktualizowana");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Transaction $transaction)
     {
-        //
+        $name = $transaction->name;
+        $transaction->delete();
+        return back()->with('success', "Transakcja ".$name." została zaktualizowana");
     }
 }

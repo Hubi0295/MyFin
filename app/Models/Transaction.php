@@ -40,6 +40,25 @@ class Transaction extends Model
                 $user->increment('balance', $transaction->amount);
             }
         });
+        static::updating(function ($transaction) {
+            $original = $transaction->getOriginal();
+            $user = $transaction->user;
+
+            // Revert the original transaction's effect on the balance
+            if ($original['type'] === 'Income') {
+                $user->decrement('balance', $original['amount']);
+            } elseif ($original['type'] === 'Expense') {
+                $user->increment('balance', $original['amount']);
+            }
+
+            // Apply the new transaction's effect on the balance
+            if ($transaction->type === 'Income') {
+                $user->increment('balance', $transaction->amount);
+            } elseif ($transaction->type === 'Expense') {
+                $user->decrement('balance', $transaction->amount);
+            }
+        });
+    
     }
 
     public function user()
