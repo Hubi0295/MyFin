@@ -14,6 +14,7 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
         //         .filter(transaction => transaction.category === category && transaction.type === "Expense")
         //         .reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0)
         // );
+
             const getLastThreeMonths = () => {
               const monthNames = [
                 "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
@@ -30,6 +31,8 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
           
               return lastThreeMonths;
             };
+
+            
         const x = document.getElementById('1');
         const y = document.getElementById('2');
         const z = document.getElementById('3');
@@ -70,31 +73,90 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
             monthlyExpensesAndIncomes.push(monthlyExpenses[i]);
             monthlyExpensesAndIncomes.push(monthlyIncomes[i]);
         }
-        console.log(monthlyExpensesAndIncomes);
-        console.log(new Date(today.getFullYear(), today.getMonth() - 1,today.getDay(), 1))
         const data = {
-        labels: labels,
-        datasets: [{
-            label: 'My First Dataset',
-            data: monthlyExpensesAndIncomes,
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            ],
-            borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            ],
-            borderWidth: 1
-        }]
+            labels: labels,
+            datasets: [{
+                label: 'Bilans wydatków i przychodów w ostatnich 3 miesiącach',
+                data: monthlyExpensesAndIncomes,
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                ],
+                borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const label2 = [];
+        for(let i = 0; i < 5; i++) {
+            const pomoc = new Date(today.getFullYear()-i, today.getMonth()+1,today.getDate(), 1);
+            for(let j=0;j<4;j++){
+                label2.push(new Date(pomoc.getFullYear(), pomoc.getMonth()-j*3));
+            }
+        }
+        const quartalInvestmentExpenses = new Array(19).fill(0);
+        const quartalInvestmentIncomes = new Array(19).fill(0);
+        label2.reverse();
+        const odnosnik = new Date(today.getFullYear()-5, today.getMonth(),today.getDate(), 1);
+        
+        // Filtrowanie i przetwarzanie transakcji
+        transakcjeRoczne.data
+            .filter(t => t.category === "Investment" && new Date(t.date) >= odnosnik)
+            .forEach(transaction => {
+                const transactionDate = new Date(transaction.date);
+        
+                for (let i = 0; i < 19; i++) {
+                    // Jeśli data transakcji pasuje do zakresu
+                    if (transactionDate > label2[i] && transactionDate <= label2[i + 1]) {
+                        if (transaction.type === "Expense") {
+                            quartalInvestmentExpenses[i] += parseFloat(transaction.amount);
+                        }
+                        if (transaction.type === "Income") {
+                            quartalInvestmentIncomes[i] += parseFloat(transaction.amount);
+                        }
+                        break; // Po przetworzeniu transakcji przerywamy pętlę
+                    }
+                }
+            });
+        
+        // Przepisywanie wartości do pustych przedziałów
+        for (let i = 1; i < 19; i++) {
+            if (quartalInvestmentExpenses[i] === 0) {
+                quartalInvestmentExpenses[i] = quartalInvestmentExpenses[i - 1];
+            }
+            if (quartalInvestmentIncomes[i] === 0) {
+                quartalInvestmentIncomes[i] = quartalInvestmentIncomes[i - 1];
+            }
+        }
+        console.log("Wydatki",quartalInvestmentExpenses);
+        console.log("Przychody",quartalInvestmentIncomes);
+        const data2 = {
+        labels: label2,
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: quartalInvestmentExpenses,
+            borderColor: 'rgba(255, 99, 132, 0.2)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            },
+            {
+            label: 'Dataset 2',
+            data: quartalInvestmentIncomes,
+            borderColor: 'rgba(255, 99, 132, 0.2)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            }
+        ]
         };
         if (ctx && ctx2 && ctx3 && ctx4) {
             // Usuń istniejący wykres, jeśli istnieje
@@ -116,14 +178,25 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
                 },
             });
             ctx2.chart = new Chart(ctx2, {
-                type: 'bar',
-                data: data,
+                type: 'line',
+                data: data2,
                 options: {
-                    scales: {
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      position: 'top',
+                    },
+                    title: {
+                      display: true,
+                      text: 'Chart.js Line Chart'
+                    }
+                  },
+                  scales: {
                     y: {
-                        beginAtZero: true
+                      beginAtZero: true
                     }
-                    }
+                  }
+                  
                 },
             });
             ctx3.chart = new Chart(ctx3, {
