@@ -32,7 +32,7 @@ class InvestmentFactory extends Factory
             'type' => fake()->randomElement(['Stock', 'Bond', 'Futures', 'Precious Metals', 'Real Estate', 'Cryptocurrency']),
             'action' => fake()->randomElement(['Buy', 'Sell']),
             'amount' => fake()->numberBetween(1,100),
-            'date_of_operation' => fake()->date(),
+            'date_of_operation' => $this->faker->dateTimeBetween('-6 years', 'now'),
             'value' => fake()->randomFloat(2, 10, 10),
             'user_id' => 1,
         ];

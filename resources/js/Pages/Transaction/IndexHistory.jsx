@@ -107,7 +107,33 @@ export default function Index({auth, transactions, queryParams=null, success}) {
             </h2>
         }>
         <Head title="Historia transakcji" />
-        
+        <div className="py-12">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
+                        <div className="p-6 text-gray-900 text-gray-100">
+                        <div style={{ width: "400px", float: "left"}}>
+                        <div className="flex justify-between items-center">
+                                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-green shadow-sm sm:rounded-lg text-white bg-green-800"> 
+                                <span className="block text-lg font-semibold text-white-600 text-white-400">
+                                    Wpływy: {incomeTransactions.reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2)}
+                                </span></div>
+                            </div>
+                        <canvas id="myChartWplywy"></canvas>
+                        </div>
+                        <div style={{ width: "400px", float: "right"}}>
+                            <div className="flex justify-between items-center">
+                            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-red shadow-sm sm:rounded-lg text-white bg-red-800"> 
+                                <span className="block text-lg font-semibold text-white-600 text-white-400">
+                                    Wydatki: {expenseTransactions.reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2)}
+                                </span></div>
+                            </div>
+                        <canvas id="myChartWydatki"></canvas>
+                        </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>    
         <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 {success && (
@@ -118,11 +144,11 @@ export default function Index({auth, transactions, queryParams=null, success}) {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
                             <div className="flex justify-between items-center">
-                                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-white shadow-sm sm:rounded-lg text-white bg-green-800"> 
+                                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-green shadow-sm sm:rounded-lg text-white bg-green-800"> 
                                 <span className="block text-lg font-semibold text-white-600 dark:text-white-400">
                                     Wpływy: {incomeTransactions.reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2)}
                                 </span></div>
-                                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-white shadow-sm sm:rounded-lg text-white bg-red-800"> 
+                                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-red shadow-sm sm:rounded-lg text-white bg-red-800"> 
                                 <span className="block text-lg font-semibold text-white-600 dark:text-white-400">
                                     Wydatki: {expenseTransactions.reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2)}
                                 </span></div>
@@ -221,8 +247,8 @@ export default function Index({auth, transactions, queryParams=null, success}) {
                                                 defaultValue={queryParams.dateFrom}
                                                 placeholder="Data Od"
                                                 type="date"
-                                                onBlur={(e) => searchFieldChanged("dateFrom", e.target.value)}
-                                                onKeyPress={(e) => onKeyPress("dateFrom", e)}
+                                                onKeyDown={(e) => e.preventDefault()}
+                                                onChange={(e) => searchFieldChanged("dateFrom", e.target.value)}
                                             />
                                                 Data od
                                             <TextInput
@@ -230,8 +256,8 @@ export default function Index({auth, transactions, queryParams=null, success}) {
                                                 defaultValue={queryParams.dateTo}
                                                 placeholder="Data Do"
                                                 type="date"
-                                                onBlur={(e) => searchFieldChanged("dateTo", e.target.value)}
-                                                onKeyPress={(e) => onKeyPress("dateTo", e)}
+                                                onKeyDown={(e) => e.preventDefault()}
+                                                onChange={(e) => searchFieldChanged("dateTo", e.target.value)}
                                             />
                                                 Data do
                                             </div>
@@ -272,33 +298,6 @@ export default function Index({auth, transactions, queryParams=null, success}) {
                 </div>
             </div>    
            
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg bg-gray-800">
-                        <div className="p-6 text-gray-900 text-gray-100">
-                        <div style={{ width: "500px", float: "left"}}>
-                        <div className="flex justify-between items-center">
-                                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-white shadow-sm sm:rounded-lg text-white bg-green-800"> 
-                                <span className="block text-lg font-semibold text-white-600 text-white-400">
-                                    Wpływy: {incomeTransactions.reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2)}
-                                </span></div>
-                            </div>
-                        <canvas id="myChartWplywy"></canvas>
-                        </div>
-                        <div style={{ width: "500px", float: "right"}}>
-                            <div className="flex justify-between items-center">
-                            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 overflow-hidden bg-white shadow-sm sm:rounded-lg text-white bg-red-800"> 
-                                <span className="block text-lg font-semibold text-white-600 text-white-400">
-                                    Wydatki: {expenseTransactions.reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2)}
-                                </span></div>
-                            </div>
-                        <canvas id="myChartWydatki"></canvas>
-                        </div>
-                        
-                        </div>
-                    </div>
-                </div>
-            </div>    
         </AuthenticatedLayout>
     );
 }

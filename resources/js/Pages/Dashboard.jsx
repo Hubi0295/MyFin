@@ -14,7 +14,6 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
         //         .filter(transaction => transaction.category === category && transaction.type === "Expense")
         //         .reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0)
         // );
-
             const getLastThreeMonths = () => {
               const monthNames = [
                 "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
@@ -33,19 +32,25 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
             };
 
             
-        const x = document.getElementById('1');
-        const y = document.getElementById('2');
-        const z = document.getElementById('3');
-        const a = document.getElementById('4');
-        x.innerHTML = transakcjeRoczne.data.filter(t=>t.type==="Income").reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
-        y.innerHTML = transakcjeRoczne.data.filter(t=>t.type==="Expense").reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
-        z.innerHTML = transakcjeRoczne.data.filter(t=>(t.type==="Income" && t.category==="Investment")).reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
-        a.innerHTML = transakcjeRoczne.data.filter(t=>(t.type==="Expense" && t.category==="Investment")).reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
+            const oneYearAgo = new Date();
+            oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    
+            const filteredTransactions = transakcjeRoczne.data.filter(t => new Date(t.date) >= oneYearAgo);
+    
+            const x = document.getElementById('1');
+            const y = document.getElementById('2');
+            const z = document.getElementById('3');
+            const a = document.getElementById('4');
+    
+            x.innerHTML = filteredTransactions.filter(t => t.type === "Income").reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2);
+            y.innerHTML = filteredTransactions.filter(t => t.type === "Expense").reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2);
+            z.innerHTML = filteredTransactions.filter(t => (t.type === "Income" && t.category === "Investment")).reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2);
+            a.innerHTML = filteredTransactions.filter(t => (t.type === "Expense" && t.category === "Investment")).reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0).toFixed(2);
         
         const ctx = document.getElementById('myChart1');
         const ctx2 = document.getElementById('myChart2');
         const ctx3 = document.getElementById('myChart3');
-        const ctx4 = document.getElementById('myChart4');
+
         const labels = getLastThreeMonths().reverse();
         const today = new Date();
 
@@ -55,8 +60,13 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
         const endDates = [getMonthStartDate(today.getFullYear(), today.getMonth() - 2),getMonthStartDate(today.getFullYear(), today.getMonth() - 1),today,];
         const monthlyExpenses = [0, 0, 0];
         const monthlyIncomes = [0, 0, 0];
+
+        const labels3 =[];
         transakcjeRoczne.data
           .forEach(transaction => {
+            if(!labels3.includes(transaction.category) && transaction.type === "Expense"){
+                labels3.push(transaction.category);
+            }
             const transactionDate = new Date(transaction.date);
             for (let i = 0; i < 3; i++) {
               if (transactionDate >= startDates[i] && transactionDate < endDates[i]) {
@@ -73,6 +83,59 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
             monthlyExpensesAndIncomes.push(monthlyExpenses[i]);
             monthlyExpensesAndIncomes.push(monthlyIncomes[i]);
         }
+
+        const label2 = [];
+        for(let i = 0; i < 5; i++) {
+            const pomoc = new Date(today.getFullYear()-i, today.getMonth()+1,today.getDate(), 1);
+            for(let j=0;j<4;j++){
+                label2.push(new Date(pomoc.getFullYear(), pomoc.getMonth()-j*3));
+            }
+        }
+        label2.reverse();
+        const odnosnik = new Date(today.getFullYear()-5, today.getMonth(),today.getDate(), 1);
+        const mapaWplywow = new Map();
+        const mapaWydatkow = new Map();
+        for(let i=0;i<19;i++){
+            mapaWplywow.set(label2[i],0);
+            mapaWydatkow.set(label2[i],0);
+        }
+        transakcjeRoczne.data
+        .filter(transaction => new Date(transaction.date) >= odnosnik && transaction.category === "Investment")
+        .forEach(transaction => {
+            const transactionDate = new Date(transaction.date);
+            for (let i = 0; i < 19; i++) {
+                if (transactionDate > label2[i] && transactionDate <= label2[i + 1] && transaction.type === "Expense")
+                    mapaWydatkow.set(label2[i], mapaWydatkow.get(label2[i]) + parseFloat(transaction.amount));
+                if (transactionDate > label2[i] && transactionDate <= label2[i + 1] && transaction.type === "Income")
+                    mapaWplywow.set(label2[i], mapaWplywow.get(label2[i]) + parseFloat(transaction.amount));
+            }
+        });
+        const doneWplywy = Array.from(mapaWplywow.values());
+        const doneWydatki = Array.from(mapaWydatkow.values());
+        for(let i=0;i<doneWplywy.length;i++){
+            if(i>0){
+                doneWplywy[i] += doneWplywy[i-1];
+                doneWydatki[i] += doneWydatki[i-1];
+            }
+        }
+        const formattedLabels = label2.map(date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`);
+        for(let i=0;i<formattedLabels.length-1;i++){
+            formattedLabels[i] = formattedLabels[i]+"-"+formattedLabels[i+1];
+        }
+        formattedLabels.pop();
+
+        const yearlyExpenses = [];
+        const borderColors3 = [];
+        labels3.forEach(category => {
+            const categoryExpenses = transakcjeRoczne.data
+                .filter(transaction => transaction.category === category && transaction.type === "Expense")
+                .reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
+            yearlyExpenses.push(categoryExpenses);
+            borderColors3.push('rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ', 0.2)');
+        });
+        console.log(yearlyExpenses);
+        console.log(borderColors3);
+
         const data = {
             labels: labels,
             datasets: [{
@@ -98,72 +161,40 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
             }]
         };
 
-        const label2 = [];
-        for(let i = 0; i < 5; i++) {
-            const pomoc = new Date(today.getFullYear()-i, today.getMonth()+1,today.getDate(), 1);
-            for(let j=0;j<4;j++){
-                label2.push(new Date(pomoc.getFullYear(), pomoc.getMonth()-j*3));
-            }
-        }
-        const quartalInvestmentExpenses = new Array(19).fill(0);
-        const quartalInvestmentIncomes = new Array(19).fill(0);
-        label2.reverse();
-        const odnosnik = new Date(today.getFullYear()-5, today.getMonth(),today.getDate(), 1);
-        
-        // Filtrowanie i przetwarzanie transakcji
-        transakcjeRoczne.data
-            .filter(t => t.category === "Investment" && new Date(t.date) >= odnosnik)
-            .forEach(transaction => {
-                const transactionDate = new Date(transaction.date);
-        
-                for (let i = 0; i < 19; i++) {
-                    // Jeśli data transakcji pasuje do zakresu
-                    if (transactionDate > label2[i] && transactionDate <= label2[i + 1]) {
-                        if (transaction.type === "Expense") {
-                            quartalInvestmentExpenses[i] += parseFloat(transaction.amount);
-                        }
-                        if (transaction.type === "Income") {
-                            quartalInvestmentIncomes[i] += parseFloat(transaction.amount);
-                        }
-                        break; // Po przetworzeniu transakcji przerywamy pętlę
-                    }
-                }
-            });
-        
-        // Przepisywanie wartości do pustych przedziałów
-        for (let i = 1; i < 19; i++) {
-            if (quartalInvestmentExpenses[i] === 0) {
-                quartalInvestmentExpenses[i] = quartalInvestmentExpenses[i - 1];
-            }
-            if (quartalInvestmentIncomes[i] === 0) {
-                quartalInvestmentIncomes[i] = quartalInvestmentIncomes[i - 1];
-            }
-        }
-        console.log("Wydatki",quartalInvestmentExpenses);
-        console.log("Przychody",quartalInvestmentIncomes);
         const data2 = {
-        labels: label2,
+        labels: formattedLabels,
         datasets: [
             {
-            label: 'Dataset 1',
-            data: quartalInvestmentExpenses,
-            borderColor: 'rgba(255, 99, 132, 0.2)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            label: 'Wpływy z inwestycji przez 5 lat',
+            data: doneWplywy,
+            borderColor: 'rgba(255, 199, 132, 0.5)',
+            backgroundColor: 'rgba(255, 199, 132, 0.5)',
             },
             {
-            label: 'Dataset 2',
-            data: quartalInvestmentIncomes,
-            borderColor: 'rgba(255, 99, 132, 0.2)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            label: 'Wydatki na inwestycje przez 5 lat',
+            data: doneWydatki,
+            borderColor: 'rgba(255, 39, 232, 0.5)',
+            backgroundColor: 'rgba(255, 39, 232, 0.5)',
             }
         ]
         };
-        if (ctx && ctx2 && ctx3 && ctx4) {
+
+        const data3 = {
+            labels: labels3,
+            datasets: [{
+                label: 'Struktura wydatków na przestrzeni wszystkich lat',
+                data: yearlyExpenses,
+                backgroundColor: borderColors3,
+                borderColor: borderColors3,
+                borderWidth: 1
+            }]
+        };
+
+        if (ctx && ctx2 && ctx3) {
             // Usuń istniejący wykres, jeśli istnieje
             if (ctx.chart) ctx.chart.destroy();
             if (ctx2.chart) ctx2.chart.destroy();    
             if (ctx3.chart) ctx3.chart.destroy();
-            if (ctx4.chart) ctx4.chart.destroy();  
 
             // Utwórz nowy wykres
             ctx.chart = new Chart(ctx, {
@@ -172,7 +203,15 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
                 options: {
                   scales: {
                     y: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                        grid:{
+                            color: '#f1f2f4'
+                        }
+                    },
+                    x:{
+                        grid:{
+                        color: '#f1f2f4'
+                        }
                     }
                   }
                 },
@@ -188,31 +227,28 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
                     },
                     title: {
                       display: true,
-                      text: 'Chart.js Line Chart'
+                      text: 'Bilans Wydatków i Przychodów z Inwestycji przez 5 lat'
                     }
                   },
                   scales: {
                     y: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                        grid:{
+                            color: '#f1f2f4'
+                        }
+                    },
+                    x:{
+                        grid:{
+                        color: '#f1f2f4'
+                        }
                     }
                   }
                   
                 },
             });
             ctx3.chart = new Chart(ctx3, {
-                type: 'bar',
-                data: data,
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                },
-            });
-            ctx4.chart = new Chart(ctx4, {
-                type: 'bar',
-                data: data,
+                type: 'polarArea',
+                data: data3,
                 options: {
                   scales: {
                     y: {
@@ -279,22 +315,21 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
                 </div>
             </div>
             <div className="py-12">
-                <div className="mx-auto ml-100 max-w-7xl sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
                         <div className="p-6 grid grid-cols-1 text-gray-900 dark:text-gray-100"> 
-                        <div style={{ width: "700px", float: "left"}}>
+                        <div style={{ width: "80%", marginInline: "auto", marginBottom: "100px"}}>
                             <canvas id="myChart1"></canvas>
                         </div>
                         
-                        <div style={{ width: "700px", float: "right"}}>
+                        <div style={{ width: "85%", marginInline: "auto", marginBottom: "100px"}}>
                             <canvas id="myChart2"></canvas>
                         </div>
-                        <div style={{ width: "700px", float: "right"}}>
+                        <div style={{ width: "80%", marginInline: "auto"}}>
+                            <p className='text-center'>Struktura wydatków na przestrzeni wszystkich lat</p>
                             <canvas id="myChart3"></canvas>
                         </div>
-                        <div style={{ width: "700px", float: "right"}}>
-                            <canvas id="myChart4"></canvas>
-                        </div>
+                        
                         </div>
                     </div>
                 </div>

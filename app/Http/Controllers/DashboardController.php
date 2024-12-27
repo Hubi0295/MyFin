@@ -14,7 +14,6 @@ class DashboardController extends Controller
         $balance = auth()->user()->balance;
         
         $transakcjeRoczne = Transaction::query()->where('user_id', auth()->id())
-            ->whereYear('date', Carbon::now()->year)
             ->get();
             return inertia("Dashboard", [
                 'balance' => $balance,

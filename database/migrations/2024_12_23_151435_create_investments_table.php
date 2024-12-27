@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->enum('type', ['Stock', 'Bond', 'Futures', 'Precious Metals', 'Real Estate', 'Cryptocurrency']);
             $table->enum('action', ['Buy', 'Sell']);
-            $table->integer('amount');
+            $table->decimal('amount', 10, 2);
             $table->date('date_of_operation');
             $table->decimal('value', 10, 2);
             $table->foreignId('user_id')->constrained(table: 'users');

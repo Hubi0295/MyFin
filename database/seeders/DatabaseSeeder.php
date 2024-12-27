@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Hubert Szelepusta',
-            'email' => 'Hubert123@example.com',
+            'email' => 'hubert123@example.com',
             'balance' => 0.0,
-            'password' => bcrypt('password123@'),
+            'password' => bcrypt('password@123'),
             'email_verified_at' => time()
         ]);
-        Transaction::factory()->count(25)->create();
-        Investment::factory()->count(5)->create();
+        Transaction::factory()->count(45)->create();
+        Investment::factory()->count(25)->create();
     }
 }
