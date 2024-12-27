@@ -82,8 +82,9 @@ export default function Create({auth}) {
                     <TextInput
                         id="transaction_amount"
                         className="block mt-1 w-full"
-                        type="text"
+                        type="number"
                         name="name"
+                        min="0"
                         value={data.amount}
                         onChange={(e) => setData('amount', e.target.value)}
                         isFocused={true}

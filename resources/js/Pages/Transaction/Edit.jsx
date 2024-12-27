@@ -87,7 +87,8 @@ export default function Create({auth, transaction}) {
                     <TextInput
                         id="transaction_amount"
                         className="block mt-1 w-full"
-                        type="text"
+                        type="number"
+                        min="0"
                         name="name"
                         value={data.amount}
                         onChange={(e) => setData('amount', e.target.value)}

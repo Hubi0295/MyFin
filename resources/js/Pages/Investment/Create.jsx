@@ -104,8 +104,9 @@ export default function Create({auth}) {
                     <TextInput
                         id="investment_amount"
                         className="block mt-1 w-full"
-                        type="text"
+                        type="number"
                         name="name"
+                        min="0"
                         value={data.amount}
                         onChange={(e) => setData('amount', e.target.value)}
                         isFocused={true}
@@ -117,8 +118,9 @@ export default function Create({auth}) {
                     <TextInput
                         id="investment_value"
                         className="block mt-1 w-full"
-                        type="text"
+                        type="number"
                         name="name"
+                        min="0"
                         value={data.value}
                         onChange={(e) => setData('value', e.target.value)}
                         isFocused={true}
