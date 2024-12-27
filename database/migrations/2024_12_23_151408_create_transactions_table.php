@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('type', ['Income', 'Expense']);
             $table->decimal('amount', 10, 2);
             $table->enum('category', ['Salary','Food', 'Transport', 'Entertainment', 'Education', 'Home', 'Service','Investment','Other']);
-            $table->date('date');
+            $table->date('date')->unique();
             $table->foreignId('user_id')->constrained(table: 'users');
             $table->timestamps();
         });

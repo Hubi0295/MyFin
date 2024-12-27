@@ -11,12 +11,13 @@ export default function Create({auth}) {
         name: '',
         description: '',
         type: '',
+        action: '',
+        value: '',
         amount: '',
-        category: '',
     })
     const onSubmit = (e) => {
         e.preventDefault()
-        post(route('transaction.store'))
+        post(route('investment.store'))
     }
     return (
     <AuthenticatedLayout
@@ -29,7 +30,7 @@ export default function Create({auth}) {
             </h2>
             </div>
         }>
-        <Head title="Tworzenie transakcji" />
+        <Head title="Tworzenie Inwestycji" />
 
         <div className="py-12">
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -39,9 +40,9 @@ export default function Create({auth}) {
                 className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg"
                 >
                     <div>
-                    <InputLabel htmlFor="transaction_name" value="Name"/>
+                    <InputLabel htmlFor="investment_name" value="Name"/>
                     <TextInput
-                        id="transaction_name"
+                        id="investment_name"
                         className="block mt-1 w-full"
                         type="text"
                         name="name"
@@ -52,9 +53,11 @@ export default function Create({auth}) {
                     <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_description" value="Description"/>
+                    <InputLabel htmlFor="investment_description" value="Description"/>
+                    {/* $table->enum('type', ['Stock', 'Bond', 'Futures', 'Precious Metals', 'Real Estate', 'Cryptocurrency','Other']);
+                    $table->enum('action', ['Buy', 'Sell']); */}
                     <TextAreaInput
-                        id="transaction_description"
+                        id="investment_description"
                         className="block mt-1 w-full"
                         type="text"
                         name="description"
@@ -64,23 +67,42 @@ export default function Create({auth}) {
                     <InputError message={errors.description} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_type" value="Type"/>
+                    <InputLabel htmlFor="investment_type" value="Type"/>
                     <SelectInput
                         name="type"
-                        id="transaction_type"
+                        id="investment_type"
                         className="block mt-1 w-full"
                         onChange={(e) => setData('type', e.target.value)}
                     >
-                        <option value="">Select type</option>
-                        <option value="Income">Income</option>
-                        <option value="Expense">Expense</option>
+                        <option value="">Select category</option>
+                        <option value="Stock">Stock</option>
+                        <option value="Bond">Bond</option>
+                        <option value="Futures">Futures</option>
+                        <option value="Real Estate">Real Estate</option>
+                        <option value="Precious Metals">Precious Metals</option>
+                        <option value="Cryptocurrency">Cryptocurrency</option>
+                        <option value="Other">Other</option>
                     </SelectInput>
                     <InputError message={errors.type} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_amount" value="Amount"/>
+                    <InputLabel htmlFor="investment_action" value="Action"/>
+                    <SelectInput
+                        name="action"
+                        id="investment_action"
+                        className="block mt-1 w-full"
+                        onChange={(e) => setData('action', e.target.value)}
+                    >
+                        <option value="">Select category</option>
+                        <option value="Sell">Sell</option>
+                        <option value="Buy">Buy</option>
+                    </SelectInput>
+                    <InputError message={errors.type} className="mt-2" />
+                    </div>
+                    <div>
+                    <InputLabel htmlFor="investment_amount" value="Amount"/>
                     <TextInput
-                        id="transaction_amount"
+                        id="investment_amount"
                         className="block mt-1 w-full"
                         type="text"
                         name="name"
@@ -91,29 +113,22 @@ export default function Create({auth}) {
                     <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_category" value="Category"/>
-                    <SelectInput
-                        name="category"
-                        id="transaction_category"
+                    <InputLabel htmlFor="investment_value" value="Value"/>
+                    <TextInput
+                        id="investment_value"
                         className="block mt-1 w-full"
-                        onChange={(e) => setData('category', e.target.value)}
-                    >
-                        <option value="">Select category</option>
-                        <option value="Food">Food</option>
-                        <option value="Transport">Transport</option>
-                        <option value="Home">Home</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Salary">Salary</option>
-                        <option value="Service">Service</option>
-                        <option value="Education">Education</option>
-                        <option value="Other">Other</option>
-
-                    </SelectInput>
-                    <InputError message={errors.type} className="mt-2" />
+                        type="text"
+                        name="name"
+                        value={data.value}
+                        onChange={(e) => setData('value', e.target.value)}
+                        isFocused={true}
+                    />
+                    <InputError message={errors.name} className="mt-2" />
                     </div>
+                    
                     <div className="mt-4 text-right">
                         <Link
-                        href={route("transaction.index")}
+                        href={route("investment.index")}
                         className="bg-gray-100 py-1 px-3 text-gray-800 rounded shadow transition-all hover:bg-gray-200 mr-2"
                         >
                         Cancel

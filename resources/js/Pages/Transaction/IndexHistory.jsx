@@ -24,6 +24,7 @@ export default function Index({auth, transactions, queryParams=null, success}) {
         // Pobierz kontekst canvas i inicjalizuj wykres
         const ctx = document.getElementById('myChartWydatki');
         const ctx2 = document.getElementById('myChartWplywy');
+        console.log(TRANSACTION_CATEGORY_CLASS_MAP[categoryExpenses]);
         if (ctx && ctx2) {
             // Usuń istniejący wykres, jeśli istnieje
             if (ctx.chart) ctx.chart.destroy();
@@ -280,12 +281,17 @@ export default function Index({auth, transactions, queryParams=null, success}) {
                                                 <td className="px-3 py-2">{transaction.amount}</td>
                                                 <td className="px-3 py-2"><span className={"px-2 py-1 rounded text-white "+ TRANSACTION_CATEGORY_CLASS_MAP[transaction.category]}>{transaction.category}</span></td>
                                                 <td className="px-3 py-2 text-nowrap">{transaction.date}</td>
-                                                <td className="px-3 py-2"><Link href={route('transaction.edit', transaction.id)} className="text-nowrap font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
-                                                Edit
-                                                </Link>  
-                                                <button onClick={e=>deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
-                                                Delete
-                                                </button>  
+                                                <td className="px-3 py-2">
+                                                {transaction.category !== 'Investment' && (
+                                                    <>
+                                                        <Link href={route('transaction.edit', transaction.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
+                                                            Edit
+                                                        </Link>  
+                                                        <button onClick={e => deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
+                                                            Delete
+                                                        </button>
+                                                    </>
+                                                )}
                                                 </td>
                                             </tr>
                                             

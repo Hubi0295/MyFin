@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->enum('type', ['Stock', 'Bond', 'Futures', 'Precious Metals', 'Real Estate', 'Cryptocurrency']);
+            $table->enum('type', ['Stock', 'Bond', 'Futures', 'Precious Metals', 'Real Estate', 'Cryptocurrency','Other']);
             $table->enum('action', ['Buy', 'Sell']);
             $table->decimal('amount', 10, 2);
-            $table->date('date_of_operation');
+            $table->date('date_of_operation')->unique();
             $table->decimal('value', 10, 2);
             $table->foreignId('user_id')->constrained(table: 'users');
             $table->timestamps();

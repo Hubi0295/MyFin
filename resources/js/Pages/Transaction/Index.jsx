@@ -151,12 +151,17 @@ export default function Index({auth, transactions, success}) {
                                                 <td className="px-3 py-2">{transaction.amount}</td>
                                                 <td className="px-3 py-2"><span className={"px-2 py-1 rounded text-white "+ TRANSACTION_CATEGORY_CLASS_MAP[transaction.category]}>{transaction.category}</span></td>
                                                 <td className="px-3 py-2 text-nowrap">{transaction.date}</td>
-                                                <td className="px-3 py-2"><Link href={route('transaction.edit', transaction.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
-                                                Edit
-                                                </Link>  
-                                                <button onClick={e=>deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
-                                                Delete
-                                                </button>  
+                                                <td className="px-3 py-2">
+                                                {transaction.category !== 'Investment' && (
+                                                    <>
+                                                        <Link href={route('transaction.edit', transaction.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
+                                                            Edit
+                                                        </Link>  
+                                                        <button onClick={e => deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
+                                                            Delete
+                                                        </button>
+                                                    </>
+                                                )}
                                                 </td>
                                             </tr>
                                             
@@ -194,12 +199,17 @@ export default function Index({auth, transactions, success}) {
                                                 <td className="px-3 py-2">{transaction.amount}</td>
                                                 <td className="px-3 py-2"><span className={"px-2 py-1 rounded text-white "+ TRANSACTION_CATEGORY_CLASS_MAP[transaction.category]}>{transaction.category}</span></td>
                                                 <td className="px-3 py-2 text-nowrap">{transaction.date}</td>
-                                                <td className="px-3 py-2"><Link href={route('transaction.edit', transaction.id)} className="text-nowrap font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
-                                                Edit
-                                                </Link>  
-                                                <button onClick={e=>deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
-                                                Delete
-                                                </button>  
+                                                <td className="px-3 py-2">
+                                                {transaction.category !== 'Investment' && (
+                                                    <>
+                                                        <Link href={route('transaction.edit', transaction.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
+                                                            Edit
+                                                        </Link>  
+                                                        <button onClick={e => deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
+                                                            Delete
+                                                        </button>
+                                                    </>
+                                                )}
                                                 </td>
                                             </tr>
                                             

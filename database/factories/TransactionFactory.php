@@ -20,7 +20,7 @@ class TransactionFactory extends Factory
            'name'=>fake()->sentence(),
            'description'=>fake()->realText(),
            'type' => fake()->randomElement(['Income', 'Expense']),
-           'amount' => fake()->randomFloat(2, 1, 100),
+           'amount' => fake()->randomFloat(2, 1, 1000),
            'category' => fake()->randomElement(['Salary','Food', 'Transport', 'Entertainment', 'Education', 'Home', 'Service','Investment', 'Other']),
            'date' => $this->faker->dateTimeBetween('-6 years', 'now'),
            'user_id' => 1,

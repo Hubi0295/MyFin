@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateInvestmentRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateInvestmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,12 @@ class UpdateInvestmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],
+            'amount' => ['required', 'numeric'],
+            'type' => ['required', Rule::in(['Stock', 'Bond', 'Futures', 'Precious Metals', 'Real Estate', 'Cryptocurrency','Other'])],
+            'action' => ['required', Rule::in(['Buy', 'Sell'])],
+            'value' => ['required', 'numeric'],
         ];
     }
 }

@@ -56,8 +56,10 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
 
         // Funkcja obliczająca datę początku miesiąca w przeszłości
         const getMonthStartDate = (year, month) => new Date(year, month, 1);
-        const startDates = [getMonthStartDate(today.getFullYear(), today.getMonth() - 3),getMonthStartDate(today.getFullYear(), today.getMonth() - 2),getMonthStartDate(today.getFullYear(), today.getMonth() - 1),];
-        const endDates = [getMonthStartDate(today.getFullYear(), today.getMonth() - 2),getMonthStartDate(today.getFullYear(), today.getMonth() - 1),today,];
+        const startDates = [getMonthStartDate(today.getFullYear(), today.getMonth() - 2),getMonthStartDate(today.getFullYear(), today.getMonth() - 1),getMonthStartDate(today.getFullYear(), today.getMonth()),];
+        const endDates = [getMonthStartDate(today.getFullYear(), today.getMonth() - 1),getMonthStartDate(today.getFullYear(), today.getMonth()),getMonthStartDate(today.getFullYear(), today.getMonth()+1),];
+        console.log(startDates);
+        console.log(endDates);
         const monthlyExpenses = [0, 0, 0];
         const monthlyIncomes = [0, 0, 0];
 
@@ -131,7 +133,7 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
                 .filter(transaction => transaction.category === category && transaction.type === "Expense")
                 .reduce((sum, transaction) => sum + parseFloat(transaction.amount || 0), 0);
             yearlyExpenses.push(categoryExpenses);
-            borderColors3.push('rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ', 0.2)');
+            borderColors3.push('rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ', 0.5)');
         });
         console.log(yearlyExpenses);
         console.log(borderColors3);
@@ -139,23 +141,23 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
         const data = {
             labels: labels,
             datasets: [{
-                label: 'Bilans wydatków i przychodów w ostatnich 3 miesiącach',
+                label: ['Bilans wydatków i przychodów w ostatnich 3 miesiącach'],
                 data: monthlyExpensesAndIncomes,
                 backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 205, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 0, 0, 0.2)',
+                'rgba(0, 255, 0, 0.2)',
+                'rgba(255, 0, 0, 0.2)',
+                'rgba(0, 255, 0, 0.2)',
+                'rgba(255, 0, 0, 0.2)',
+                'rgba(0, 255, 0, 0.2)',
                 ],
                 borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
+                'rgb(255, 0, 0)',
+                'rgb(0, 255, 0)',
+                'rgb(255, 0, 0)',
+                'rgb(0, 255, 0)',
+                'rgb(255, 0, 0)',
+                'rgb(0, 255, 0)',
                 ],
                 borderWidth: 1
             }]
@@ -167,14 +169,14 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
             {
             label: 'Wpływy z inwestycji przez 5 lat',
             data: doneWplywy,
-            borderColor: 'rgba(255, 199, 132, 0.5)',
-            backgroundColor: 'rgba(255, 199, 132, 0.5)',
+            borderColor: 'rgba(0, 255, 0, 0.6)',
+            backgroundColor: 'rgba(0, 255, 0, 0.6)',
             },
             {
             label: 'Wydatki na inwestycje przez 5 lat',
             data: doneWydatki,
-            borderColor: 'rgba(255, 39, 232, 0.5)',
-            backgroundColor: 'rgba(255, 39, 232, 0.5)',
+            borderColor: 'rgba(255, 0, 0, 0.6)',
+            backgroundColor: 'rgba(255, 0, 0, 0.6)',
             }
         ]
         };
@@ -252,7 +254,15 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
                 options: {
                   scales: {
                     y: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                      grid:{
+                        color: '#f1f2f4'
+                        }
+                    },
+                    x:{
+                        grid:{
+                        color: '#f1f2f4'
+                        }
                     }
                   }
                 },
@@ -264,7 +274,8 @@ export default function Dashboard({ auth, balance, transakcjeRoczne }) {
             user = {auth.user}
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                    Witaj! {auth.user.name}
+                    <span>{auth.user.name} | </span>
+                    <span>Saldo: {auth.user.balance.toFixed(2)}</span>
                 </h2>
             }
         >

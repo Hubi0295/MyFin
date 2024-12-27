@@ -109,7 +109,6 @@ export default function Create({auth, transaction}) {
                         <option value="Home">Home</option>
                         <option value="Entertainment">Entertainment</option>
                         <option value="Salary">Salary</option>
-                        <option value="Investment">Investment</option>
                         <option value="Service">Service</option>
                         <option value="Education">Education</option>
                         <option value="Other">Other</option>

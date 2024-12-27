@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password@123'),
             'email_verified_at' => time()
         ]);
-        Transaction::factory()->count(45)->create();
-        Investment::factory()->count(25)->create();
+        Transaction::factory()->count(25)->create();
+        Investment::factory()->count(15)->create();
     }
 }
