@@ -43,7 +43,7 @@ export default function Create({auth, transaction}) {
                 className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg"
                 >
                     <div>
-                    <InputLabel htmlFor="transaction_name" value="Name"/>
+                    <InputLabel htmlFor="transaction_name" value="Nazwa"/>
                     <TextInput
                         id="transaction_name"
                         className="block mt-1 w-full"
@@ -56,7 +56,7 @@ export default function Create({auth, transaction}) {
                     <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_description" value="Description"/>
+                    <InputLabel htmlFor="transaction_description" value="Opis"/>
                     <TextAreaInput
                         id="transaction_description"
                         className="block mt-1 w-full"
@@ -68,7 +68,7 @@ export default function Create({auth, transaction}) {
                     <InputError message={errors.description} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_type" value="Type"/>
+                    <InputLabel htmlFor="transaction_type" value="Typ"/>
                     <SelectInput
                         name="type"
                         id="transaction_type"
@@ -76,14 +76,14 @@ export default function Create({auth, transaction}) {
                         onChange={(e) => setData('type', e.target.value)}
                         
                     >
-                        <option value="">Select type</option>
+                        <option value="">Wybierz typ</option>
                         <option value="Income">Income</option>
                         <option value="Expense">Expense</option>
                     </SelectInput>
                     <InputError message={errors.type} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_amount" value="Amount"/>
+                    <InputLabel htmlFor="transaction_amount" value="Kwota"/>
                     <TextInput
                         id="transaction_amount"
                         className="block mt-1 w-full"
@@ -97,14 +97,14 @@ export default function Create({auth, transaction}) {
                     <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="transaction_category" value="Category"/>
+                    <InputLabel htmlFor="transaction_category" value="Kategoria"/>
                     <SelectInput
                         name="category"
                         id="transaction_category"
                         className="block mt-1 w-full"
                         onChange={(e) => setData('category', e.target.value)}
                     >
-                        <option value="">Select category</option>
+                        <option value="">Wybierz kategorie</option>
                         <option value="Food">Food</option>
                         <option value="Transport">Transport</option>
                         <option value="Home">Home</option>
@@ -122,10 +122,10 @@ export default function Create({auth, transaction}) {
                         href={route("transaction.index")}
                         className="bg-gray-100 py-1 px-3 text-gray-800 rounded shadow transition-all hover:bg-gray-200 mr-2"
                         >
-                        Cancel
+                        Anuluj
                         </Link>
                         <button className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600">
-                        Submit
+                        Zapisz
                         </button>
                     </div>
                 </form>

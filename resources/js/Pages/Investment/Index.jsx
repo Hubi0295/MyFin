@@ -137,14 +137,14 @@ export default function Index({auth, investments, success}) {
                                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                                 <tr>
                                                     <th className="px-3 py-2">ID</th>
-                                                    <th className="px-3 py-2">Name</th>
-                                                    <th className="px-3 py-2">Description</th>
-                                                    <th className="px-3 py-2">Category</th>
-                                                    <th className="px-3 py-2">Action</th>
-                                                    <th className="px-3 py-2">Amount</th>
-                                                    <th className="px-3 py-2">Value</th>
-                                                    <th className="px-3 py-2">Date</th>
-                                                    <th className="px-3 py-2 text-right">Action</th>
+                                                    <th className="px-3 py-2">Nazwa</th>
+                                                    <th className="px-3 py-2">Opis</th>
+                                                    <th className="px-3 py-2">Kategoria</th>
+                                                    <th className="px-3 py-2">Typ</th>
+                                                    <th className="px-3 py-2">Ilość</th>
+                                                    <th className="px-3 py-2">Cena</th>
+                                                    <th className="px-3 py-2">Data</th>
+                                                    <th className="px-3 py-2 text-right">Akcja</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -160,10 +160,10 @@ export default function Index({auth, investments, success}) {
                                                         <td className="px-3 py-2 text-nowrap">{investment.date_of_operation}</td>
                                                         <td className="px-3 py-2">
                                                         <Link href={route('investment.edit', investment.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
-                                                            Edit
+                                                            Edytuj
                                                         </Link>  
                                                         <button onClick={e => deleteInvestment(investment)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
-                                                            Delete
+                                                            Usuń
                                                         </button>
                                                         </td>
                                                     </tr>

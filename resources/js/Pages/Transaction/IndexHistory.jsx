@@ -158,13 +158,13 @@ export default function Index({auth, transactions, queryParams=null, success}) {
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
                                             <th onClick={e => sortChanged('id')} className="px-3 py-2 cursor-pointer">ID</th>
-                                            <th onClick={e => sortChanged('name')} className="px-3 py-2 cursor-pointer">name</th>
-                                            <th onClick={e => sortChanged('description')} className="px-3 py-2 cursor-pointer">description</th>
-                                            <th onClick={e => sortChanged('type')} className="px-3 py-2 cursor-pointer">type</th>
-                                            <th onClick={e => sortChanged('amount')} className="px-3 py-2 cursor-pointer">amount</th>
-                                            <th onClick={e => sortChanged('category')} className="px-3 py-2 cursor-pointer">category</th>
-                                            <th onClick={e => sortChanged('date')} className="px-3 py-2 cursor-pointer">date</th>
-                                            <th className="px-3 py-2 text-right">action</th>
+                                            <th onClick={e => sortChanged('name')} className="px-3 py-2 cursor-pointer">nazwa</th>
+                                            <th onClick={e => sortChanged('description')} className="px-3 py-2 cursor-pointer">opis</th>
+                                            <th onClick={e => sortChanged('type')} className="px-3 py-2 cursor-pointer">typ</th>
+                                            <th onClick={e => sortChanged('amount')} className="px-3 py-2 cursor-pointer">kwota</th>
+                                            <th onClick={e => sortChanged('category')} className="px-3 py-2 cursor-pointer">kategoria</th>
+                                            <th onClick={e => sortChanged('date')} className="px-3 py-2 cursor-pointer">data</th>
+                                            <th className="px-3 py-2 text-right">akcja</th>
                                         </tr>
                                     </thead>
                                 
@@ -285,10 +285,10 @@ export default function Index({auth, transactions, queryParams=null, success}) {
                                                 {transaction.category !== 'Investment' && (
                                                     <>
                                                         <Link href={route('transaction.edit', transaction.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
-                                                            Edit
+                                                            Edytuj
                                                         </Link>  
                                                         <button onClick={e => deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
-                                                            Delete
+                                                            Usuń
                                                         </button>
                                                     </>
                                                 )}

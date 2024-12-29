@@ -40,7 +40,7 @@ export default function Create({auth}) {
                 className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg"
                 >
                     <div>
-                    <InputLabel htmlFor="investment_name" value="Name"/>
+                    <InputLabel htmlFor="investment_name" value="Nazwa"/>
                     <TextInput
                         id="investment_name"
                         className="block mt-1 w-full"
@@ -53,7 +53,7 @@ export default function Create({auth}) {
                     <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="investment_description" value="Description"/>
+                    <InputLabel htmlFor="investment_description" value="Opis"/>
                     {/* $table->enum('type', ['Stock', 'Bond', 'Futures', 'Precious Metals', 'Real Estate', 'Cryptocurrency','Other']);
                     $table->enum('action', ['Buy', 'Sell']); */}
                     <TextAreaInput
@@ -67,14 +67,14 @@ export default function Create({auth}) {
                     <InputError message={errors.description} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="investment_type" value="Type"/>
+                    <InputLabel htmlFor="investment_type" value="Kategoria"/>
                     <SelectInput
                         name="type"
                         id="investment_type"
                         className="block mt-1 w-full"
                         onChange={(e) => setData('type', e.target.value)}
                     >
-                        <option value="">Select category</option>
+                        <option value="">Wybierz aktywo</option>
                         <option value="Stock">Stock</option>
                         <option value="Bond">Bond</option>
                         <option value="Futures">Futures</option>
@@ -86,21 +86,21 @@ export default function Create({auth}) {
                     <InputError message={errors.type} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="investment_action" value="Action"/>
+                    <InputLabel htmlFor="investment_action" value="Typ"/>
                     <SelectInput
                         name="action"
                         id="investment_action"
                         className="block mt-1 w-full"
                         onChange={(e) => setData('action', e.target.value)}
                     >
-                        <option value="">Select category</option>
+                        <option value="">Wybierz typ</option>
                         <option value="Sell">Sell</option>
                         <option value="Buy">Buy</option>
                     </SelectInput>
                     <InputError message={errors.type} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="investment_amount" value="Amount"/>
+                    <InputLabel htmlFor="investment_amount" value="Ilość"/>
                     <TextInput
                         id="investment_amount"
                         className="block mt-1 w-full"
@@ -114,7 +114,7 @@ export default function Create({auth}) {
                     <InputError message={errors.name} className="mt-2" />
                     </div>
                     <div>
-                    <InputLabel htmlFor="investment_value" value="Value"/>
+                    <InputLabel htmlFor="investment_value" value="Cena"/>
                     <TextInput
                         id="investment_value"
                         className="block mt-1 w-full"
@@ -133,10 +133,10 @@ export default function Create({auth}) {
                         href={route("investment.index")}
                         className="bg-gray-100 py-1 px-3 text-gray-800 rounded shadow transition-all hover:bg-gray-200 mr-2"
                         >
-                        Cancel
+                        Anuluj
                         </Link>
                         <button className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600">
-                        Submit
+                        Zapisz
                         </button>
                     </div>
                 </form>

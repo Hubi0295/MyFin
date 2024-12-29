@@ -132,13 +132,13 @@ export default function Index({auth, transactions, success}) {
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
                                             <th className="px-3 py-2">ID</th>
-                                            <th className="px-3 py-2">name</th>
-                                            <th className="px-3 py-2">description</th>
-                                            <th className="px-3 py-2">type</th>
-                                            <th className="px-3 py-2">amount</th>
-                                            <th className="px-3 py-2">category</th>
-                                            <th className="px-3 py-2">date</th>
-                                            <th className="px-3 py-2 text-right">action</th>
+                                            <th className="px-3 py-2">nazwa</th>
+                                            <th className="px-3 py-2">opis</th>
+                                            <th className="px-3 py-2">typ</th>
+                                            <th className="px-3 py-2">kwota</th>
+                                            <th className="px-3 py-2">kategoria</th>
+                                            <th className="px-3 py-2">data</th>
+                                            <th className="px-3 py-2 text-right">akcja</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -155,10 +155,10 @@ export default function Index({auth, transactions, success}) {
                                                 {transaction.category !== 'Investment' && (
                                                     <>
                                                         <Link href={route('transaction.edit', transaction.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
-                                                            Edit
+                                                            Edytuj
                                                         </Link>  
                                                         <button onClick={e => deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
-                                                            Delete
+                                                            Usuń
                                                         </button>
                                                     </>
                                                 )}
@@ -180,13 +180,13 @@ export default function Index({auth, transactions, success}) {
                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
                                             <th className="px-3 py-2">ID</th>
-                                            <th className="px-3 py-2">name</th>
-                                            <th className="px-3 py-2">description</th>
-                                            <th className="px-3 py-2">type</th>
-                                            <th className="px-3 py-2">amount</th>
-                                            <th className="px-3 py-2">category</th>
-                                            <th className="px-3 py-2">date</th>
-                                            <th className="px-3 py-2 text-right">action</th>
+                                            <th className="px-3 py-2">nazwa</th>
+                                            <th className="px-3 py-2">opis</th>
+                                            <th className="px-3 py-2">typ</th>
+                                            <th className="px-3 py-2">kwota</th>
+                                            <th className="px-3 py-2">kategoria</th>
+                                            <th className="px-3 py-2">data</th>
+                                            <th className="px-3 py-2 text-right">akcja</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -203,10 +203,10 @@ export default function Index({auth, transactions, success}) {
                                                 {transaction.category !== 'Investment' && (
                                                     <>
                                                         <Link href={route('transaction.edit', transaction.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
-                                                            Edit
+                                                            Edytuj
                                                         </Link>  
                                                         <button onClick={e => deleteTransaction(transaction)} className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1">
-                                                            Delete
+                                                            Usuń
                                                         </button>
                                                     </>
                                                 )}
