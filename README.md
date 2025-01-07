@@ -24,10 +24,19 @@ Hubert Szelepusta
 - **Podsumowanie wydatków oraz przychodów, kosztów oraz zysków z inwestycji**
 
 # Narzędzia i technologie:
+
+
 **Backend**: Laravel, Breeze
+
+
 **Frontend**: Vite, React, Tailwind
+
+
 **Baza danych**: SQLite
+
+
 **Inne**: Inertia, Chart.JS
+
 
 # Wymagania
 PHP: 8.2
@@ -63,7 +72,7 @@ SQLite: 3.26.0
 Polecany przez mnie sposób instalacji wymaganych bibliotek, testowane na czystej maszynie wirtualnej:
 
 
-## 1.
+### 1.
 Windows:
 Instalacja php, laravel, composer:  
 komenda win powershel w trybie administratora:  
@@ -73,22 +82,22 @@ Linux:
 /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)" 
 
 
-## 2
+### 2.
 Instalacja Node ze strony: https://nodejs.org/en
 
 
-## 3
+### 3
 Instalacja ChartJS: npm install chart.js 
 Link do strony: https://www.chartjs.org/docs/latest/getting-started/installation.html
 
 
-## 4
+### 4
 Instalacja Git: https://git-scm.com/downloads/win
 
 Ważne jest sprawdzenie poprawności dodania zmiennych środowiskowych PATH!
 
 
-## 5
+### 5
 Po zainstalowaniu wszystkich potrzebnych komponentów należy w wierszu poleceń wykonać następujące polecenia:
 
 
