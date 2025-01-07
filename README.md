@@ -109,7 +109,7 @@ Link do strony: https://www.chartjs.org/docs/latest/getting-started/installation
 Instalacja Git: https://git-scm.com/downloads/win
 
 
-### 5.
+### 5. WAZNE !!
 Po zainstalowaniu wszystkich potrzebnych komponentów należy w wierszu poleceń wykonać następujące polecenia:
 
 
