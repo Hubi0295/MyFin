@@ -141,6 +141,8 @@ Na koniec wystarczy otworzyć dwa terminale i wykonać 2 polecenia:
 **php artisan serve** - start serwera Laravel
 
 
+W Przeglądarce otworzyć: **http://127.0.0.1:8000/login**
+
 # Uwagi
 Jeśli serwer nie startuje po kilku próbach na różnych portach, w odpowiednij wersji pliku php.ini zmienić variables_order = "GPCS".
 Wesje używanego php do namierzenia pliku php.ini można sprawdzić komendą php –i 
