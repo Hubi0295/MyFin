@@ -1,15 +1,15 @@
 
 
-## Nazwa projektu - MyFin
+# Nazwa projektu - MyFin
 
-## Tematyka projektu
+# Tematyka projektu
 
 Aplikacja zbudowana według wzorca MVC wspomagająca zarządzanie finansami- budżet domowy oraz inwestycje.
 
-## Autor
+# Autor
 Hubert Szelepusta
 
-## Funkcjonalności
+# Funkcjonalności
 
 - **Rejestracja z linkiem aktywacyjnym, logowanie oraz edycja konta**
 - **Dodawanie, edycja oraz usuwanie wydatków**
@@ -23,13 +23,13 @@ Hubert Szelepusta
 - **Zmiana motywu na jasny/ciemny**
 - **Podsumowanie wydatków oraz przychodów, kosztów oraz zysków z inwestycji**
 
-## Narzędzia i technologie:
+# Narzędzia i technologie:
 **Backend**: Laravel, Breeze
 **Frontend**: Vite, React, Tailwind
 **Baza danych**: SQLite
 **Inne**: Inertia, Chart.JS
 
-## Wymagania
+# Wymagania
 PHP: 8.2
 
 
@@ -63,7 +63,7 @@ SQLite: 3.26.0
 Polecany przez mnie sposób instalacji wymaganych bibliotek, testowane na czystej maszynie wirtualnej:
 
 
-###1.
+##1.
 Windows:
 Instalacja php, laravel, composer:  
 komenda win powershel w trybie administratora:  
@@ -73,22 +73,22 @@ Linux:
 /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)" 
 
 
-###2
+##2
 Instalacja Node ze strony: https://nodejs.org/en
 
 
-###3
+##3
 Instalacja ChartJS: npm install chart.js 
 Link do strony: https://www.chartjs.org/docs/latest/getting-started/installation.html
 
 
-###4
+##4
 Instalacja Git: https://git-scm.com/downloads/win
 
 Ważne jest sprawdzenie poprawności dodania zmiennych środowiskowych PATH!
 
 
-###5
+##5
 Po zainstalowaniu wszystkich potrzebnych komponentów należy w wierszu poleceń wykonać następujące polecenia:
 
 
@@ -110,13 +110,13 @@ php artisan migrate –-seed - Utworzenie tabel oraz stworzenie testowego konta 
 yes - Utworzenie bazy danych
 
 
-## Uruchomienie
+# Uruchomienie
 Na koniec wystarczy otworzyć dwa terminale i wykonać 2 polecenia:
 npm run dev - start serwera Vite
 php artisan serve - start serwera Laravel
 
 
-## Uwagi
+# Uwagi
 Jeśli serwer nie startuje po kilku próbach na różnych portach, w odpowiednij wersji pliku php.ini zmienić variables_order = "GPCS".
 Wesje używanego php do namierzenia pliku php.ini można sprawdzić komendą php –i 
 
@@ -125,7 +125,7 @@ Po zarejestowaniu nowego użytkownika link aktywacyjny konta jest wysłany mailo
 Ustawiono kanał do wysyłania wiadomości jako Logger więc link znajduje się w storage>logs>laravel.log 
 
 
-## Konto testowe utworzone po migracji
+# Konto testowe utworzone po migracji
 Login: hubert123@example.com
 
 
