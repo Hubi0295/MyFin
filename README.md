@@ -1,3 +1,4 @@
+### **Projekt dostępny jest również na github: [GITHUB]https://github.com/Hubi0295/MyFin**
 
 
 # Nazwa projektu - MyFin
@@ -69,6 +70,7 @@ Hubert Szelepusta
 *SQLite: 3.26.0*
 
 
+# Instalacja
 *Polecany przez mnie sposób instalacji wymaganych bibliotek, testowane na czystej maszynie wirtualnej:*
 
 
