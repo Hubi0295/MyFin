@@ -79,7 +79,10 @@ Hubert Szelepusta
 Windows:
 Instalacja php, laravel, composer:  
 komenda win powershel w trybie administratora:  
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))
+
+
+*Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))*
+
 
 Linux:
 /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)" 
