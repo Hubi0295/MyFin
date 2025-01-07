@@ -133,8 +133,12 @@ yes - Utworzenie bazy danych
 
 # Uruchomienie
 Na koniec wystarczy otworzyć dwa terminale i wykonać 2 polecenia:
-npm run dev - start serwera Vite
-php artisan serve - start serwera Laravel
+
+
+**npm run dev** - start serwera Vite
+
+
+**php artisan serve** - start serwera Laravel
 
 
 # Uwagi
