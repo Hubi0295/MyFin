@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->date('date_of_operation')->unique();
             $table->decimal('value', 10, 2);
-            $table->foreignId('user_id')->constrained(table: 'users');
+            $table->foreignId('user_id')->constrained(table: 'users')->onDelete('cascade');
             $table->timestamps();
             
         });
