@@ -156,8 +156,4 @@ Ustawiono kanał do wysyłania wiadomości jako Logger więc link znajduje się 
 Login: hubert123@example.com
 
 
-<<<<<<< HEAD
 Hasło: password@123 
-=======
-Hasło: password@123 
->>>>>>> 17687fd7a055e9c3968189d33bde672635800355
