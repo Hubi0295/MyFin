@@ -31,17 +31,38 @@ Hubert Szelepusta
 
 ## Wymagania
 PHP: 8.2
+
+
 Composer: 2.8.3
+
+
 Laravel: 11.31
+
+
 React: 18.2.0
+
+
 Tailwind:3.2.1
+
+
 ChartJs: 4.4.7
+
+
 Vite: 6.0
+
+
 Node: 22.12
+
+
 Git: 2.39.1
+
+
 SQLite: 3.26.0
 
+
 Polecany przez mnie sposób instalacji wymaganych bibliotek, testowane na czystej maszynie wirtualnej:
+
+
 ###1.
 Windows:
 Instalacja php, laravel, composer:  
@@ -50,39 +71,62 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 Linux:
 /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)" 
+
+
 ###2
 Instalacja Node ze strony: https://nodejs.org/en
+
 
 ###3
 Instalacja ChartJS: npm install chart.js 
 Link do strony: https://www.chartjs.org/docs/latest/getting-started/installation.html
+
 
 ###4
 Instalacja Git: https://git-scm.com/downloads/win
 
 Ważne jest sprawdzenie poprawności dodania zmiennych środowiskowych PATH!
 
+
 ###5
 Po zainstalowaniu wszystkich potrzebnych komponentów należy w wierszu poleceń wykonać następujące polecenia:
+
+
 composer install  - instalacja composer do projektu
+
+
 npm install  - instalacja zależności z pliku package.json
+
+
 copy .env.example .env - utworzenie pliku konfiguracyjengo
+
+
 php artisan key:generate - generuje nowy klucz aplikacji i zapisuje go do pliku .env 
+
+
 php artisan migrate –-seed - Utworzenie tabel oraz stworzenie testowego konta i wypełnienie go losowymi transakcjami
+
+
 yes - Utworzenie bazy danych
+
 
 ## Uruchomienie
 Na koniec wystarczy otworzyć dwa terminale i wykonać 2 polecenia:
 npm run dev - start serwera Vite
 php artisan serve - start serwera Laravel
 
+
 ## Uwagi
 Jeśli serwer nie startuje po kilku próbach na różnych portach, w odpowiednij wersji pliku php.ini zmienić variables_order = "GPCS".
 Wesje używanego php do namierzenia pliku php.ini można sprawdzić komendą php –i 
 
+
 Po zarejestowaniu nowego użytkownika link aktywacyjny konta jest wysłany mailowo. 
 Ustawiono kanał do wysyłania wiadomości jako Logger więc link znajduje się w storage>logs>laravel.log 
 
+
 ## Konto testowe utworzone po migracji
 Login: hubert123@example.com
+
+
 Hasło: password@123 
