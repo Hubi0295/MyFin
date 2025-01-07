@@ -1,4 +1,4 @@
-### **Projekt dostępny jest również na github: [GITHUB](https://github.com/Hubi0295/MyFin)**
+### **Projekt dostępny jest również na Github: https://github.com/Hubi0295/MyFin**
 
 
 # Nazwa projektu - MyFin
