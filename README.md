@@ -39,37 +39,40 @@ Hubert Szelepusta
 
 
 # Wymagania
-PHP: 8.2
+*PHP: 8.2*
 
 
-Composer: 2.8.3
+*Composer: 2.8.3*
 
 
-Laravel: 11.31
+*Laravel: 11.31*
 
 
-React: 18.2.0
+*React: 18.2.0*
 
 
-Tailwind:3.2.1
+*Tailwind:3.2.1*
 
 
-ChartJs: 4.4.7
+*ChartJs: 4.4.7*
 
 
-Vite: 6.0
+*Vite: 6.0*
 
 
-Node: 22.12
+*Node: 22.12*
 
 
-Git: 2.39.1
+*Git: 2.39.1*
 
 
-SQLite: 3.26.0
+*SQLite: 3.26.0*
 
 
-Polecany przez mnie sposób instalacji wymaganych bibliotek, testowane na czystej maszynie wirtualnej:
+*Polecany przez mnie sposób instalacji wymaganych bibliotek, testowane na czystej maszynie wirtualnej:*
+
+
+**Ważne jest sprawdzenie poprawności dodania zmiennych środowiskowych PATH!**
 
 
 ### 1.
@@ -86,18 +89,16 @@ Linux:
 Instalacja Node ze strony: https://nodejs.org/en
 
 
-### 3
+### 3.
 Instalacja ChartJS: npm install chart.js 
 Link do strony: https://www.chartjs.org/docs/latest/getting-started/installation.html
 
 
-### 4
+### 4.
 Instalacja Git: https://git-scm.com/downloads/win
 
-Ważne jest sprawdzenie poprawności dodania zmiennych środowiskowych PATH!
 
-
-### 5
+### 5.
 Po zainstalowaniu wszystkich potrzebnych komponentów należy w wierszu poleceń wykonać następujące polecenia:
 
 
