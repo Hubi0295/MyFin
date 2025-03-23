@@ -97,11 +97,19 @@ Linux:
 ```
 
 ### 2.
-Instalacja Node ze strony: ```bash https://nodejs.org/en ```
+Instalacja Node ze strony: 
+
+```bash
+https://nodejs.org/en
+```
 
 
 ### 3.
-Instalacja ChartJS: ```bash npm install chart.js ```
+Instalacja ChartJS: 
+
+```bash
+npm install chart.js 
+```
 Link do strony:  https://www.chartjs.org/docs/latest/getting-started/installation.html
 
 
@@ -139,10 +147,10 @@ yes - Utworzenie bazy danych
 Na koniec wystarczy otworzyć dwa terminale i wykonać 2 polecenia:
 
 ```bash
-**npm run dev** - start serwera Vite
+npm run dev - start serwera Vite
 ```
 ```bash
-**php artisan serve** - start serwera Laravel
+php artisan serve - start serwera Laravel
 ```
 
 W Przeglądarce otworzyć: **http://127.0.0.1:8000/login**
