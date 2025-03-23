@@ -86,33 +86,37 @@ Windows:
 
 komenda windows powershel w trybie administratora:  
 
-
+```bash
 *Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))*
-
+```
 
 Linux:
 
-
+```bash
 */bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"*
-
+```
 
 ### 2.
-Instalacja Node ze strony: https://nodejs.org/en
+Instalacja Node ze strony: ```bash https://nodejs.org/en ```
 
 
 ### 3.
-Instalacja ChartJS: npm install chart.js 
-Link do strony: https://www.chartjs.org/docs/latest/getting-started/installation.html
+Instalacja ChartJS: ```bash npm install chart.js ```
+Link do strony:  https://www.chartjs.org/docs/latest/getting-started/installation.html
 
 
 ### 4.
-Instalacja Git: https://git-scm.com/downloads/win
+Instalacja Git: 
+
+```bash
+https://git-scm.com/downloads/win
+```
 
 
 ### 5. WAZNE !!
 Po zainstalowaniu wszystkich potrzebnych komponentów należy w wierszu poleceń wykonać następujące polecenia:
 
-
+```bash
 composer install  - instalacja composer do projektu
 
 
@@ -129,17 +133,17 @@ php artisan migrate –-seed - Utworzenie tabel oraz stworzenie testowego konta 
 
 
 yes - Utworzenie bazy danych
-
+```
 
 # Uruchomienie
 Na koniec wystarczy otworzyć dwa terminale i wykonać 2 polecenia:
 
-
+```bash
 **npm run dev** - start serwera Vite
-
-
+```
+```bash
 **php artisan serve** - start serwera Laravel
-
+```
 
 W Przeglądarce otworzyć: **http://127.0.0.1:8000/login**
 
